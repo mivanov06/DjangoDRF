@@ -20,5 +20,26 @@ python manage.py startapp women
     python manage.py createsuperuser
     root/root
 
-зарегистрировать приложение Women в админке в файле admin.py
+зарегистрировать приложение Women, Category в админке в файле admin.py
     admin.site.register(Women)
+    admin.site.register(category)
+
+Установить DRF
+    pip install djangorestframework
+
+в файле settings.py в секции INSTALLED_APPS добавить 'rest_framework'
+
+создать представление в views.py
+    class WomenAPIView(generics.ListAPIView):
+    queryset = Women.object.all()
+    serializer_class = WomenSerializer
+
+создать сериалайзер Womenserializer в файле serialisers.py (создать)
+    class WomenSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Women
+            fields = ('title', 'cat_id')    # возвращаемые поля
+
+прописать маршрут для представления в url.py
+    from women.views import WomenAPIView
+    path('api/v1/womenlist', WomenAPIView.as_view)
