@@ -1,0 +1,24 @@
+https://www.youtube.com/watch?v=EVrMbS14FdE&list=PLA0M1Bcd0w8xZA3Kl1fYmOH_MfLpiYMRs&index=2
+
+pip install Django
+
+django-admin startproject drfsite
+
+python manage.py migrate
+
+python manage.py startapp women
+
+в файле settings.py в секции INSTALLED_APPS добавить 'women.apps.WomenConfig'
+
+в файле models.py добавить классы Women, Category
+
+сделать миграции
+    python manage.py makemigrations
+    python manage.py migrate
+
+создать пользователя
+    python manage.py createsuperuser
+    root/root
+
+зарегистрировать приложение Women в админке в файле admin.py
+    admin.site.register(Women)
