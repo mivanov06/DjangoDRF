@@ -116,3 +116,47 @@ class WomenViewSet(viewsets.ModelViewSet):
     переопределить get_queryset в WomenViewSet
 
     сделать произвольный роутер
+
+#10. Ограничения доступа (permissions)
+
+Внести изменение в модель Women, добавить поле
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
+
+    создать и применить миграцию
+    python manage.py makemigrations
+    python manage.py migrate
+
+    Опять создать 3 представления
+            class WomenAPIList(generics.ListCreateAPIView):
+            queryset = Women.objects.all()
+            serializer_class = WomenSerializer
+            permission_classes = (IsAuthenticatedOrReadOnly,)
+
+
+        class WomenAPIUpdate(generics.RetrieveUpdateAPIView):
+            queryset = Women.objects.all()  # возвращает одно значение
+            serializer_class = WomenSerializer
+
+
+        class WomenAPIDestroy(generics.RetrieveUpdateDestroyAPIView):
+            queryset = Women.objects.all()  # возвращает одно значение
+            serializer_class = WomenSerializer
+
+    в Womenserializer добавить
+        user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    можно создать свой класс ограничений
+    создать файл permissions.py со своими классами доступа
+        class IsAdminOrReadOnly(permissions.BasePermission):
+        def has_permission(self, request, view):
+            if request.method in permissions.SAFE_METHODS:  # если метод безопасный
+                return True
+
+            return bool(request.user and request.user.is_staff)  # доступ для администратора
+
+    можно прописать глобальные права доступа по умолчанию в settings.py
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
+    ]
+
