@@ -87,7 +87,7 @@ python manage.py startapp women
 добавить класс Meta с атрибутами model и fields
 добавлен новый класс class WomenAPIList(generics.ListCreateAPIView) наследуемый от generics.ListCreateAPIView
 
-№7
+#7
 Представления UpdateAPIView и RetrieveUpdateDestroyAPIView
 создать класс WomenAPIUpdate(generics.UpdateAPIView)
 
@@ -100,3 +100,12 @@ RetrieveUpdateDestroyAPIView позволяет получить, изменят
             'rest_framework.renderers.JSONRenderer',
     #        'rest_framework.renderers.BrowsableAPIRenderer',
     ]
+
+#8 Viewsets и ModelViewSet
+Изменяем представления view
+class WomenViewSet(viewsets.ModelViewSet):
+    queryset = Women.objects.all()
+    serializer_class = WomenSerializer
+
+изменить маршруты
+    с помощью SimpleRouter
