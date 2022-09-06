@@ -109,3 +109,10 @@ class WomenViewSet(viewsets.ModelViewSet):
 
 изменить маршруты
     с помощью SimpleRouter
+
+#9. Роутеры: SimpleRouter и DefaultRouter
+    создать декоратор @action для нового маршрута
+
+    переопределить get_queryset в WomenViewSet
+
+    сделать произвольный роутер
