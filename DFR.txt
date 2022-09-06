@@ -82,4 +82,7 @@ python manage.py startapp women
     и метод put в WomenAPIView
         def put(self, request, *args, **kwargs):
 
-
+#6
+редактируем класс WomenSerializer, наследование от serializers.ModelSerializer
+добавить класс Meta с атрибутами model и fields
+добавлен новый класс class WomenAPIList(generics.ListCreateAPIView) наследуемый от generics.ListCreateAPIView
