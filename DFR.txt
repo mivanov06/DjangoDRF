@@ -86,3 +86,17 @@ python manage.py startapp women
 редактируем класс WomenSerializer, наследование от serializers.ModelSerializer
 добавить класс Meta с атрибутами model и fields
 добавлен новый класс class WomenAPIList(generics.ListCreateAPIView) наследуемый от generics.ListCreateAPIView
+
+№7
+Представления UpdateAPIView и RetrieveUpdateDestroyAPIView
+создать класс WomenAPIUpdate(generics.UpdateAPIView)
+
+создать WomenAPIDetailView(generics.RetrieveUpdateDestroyAPIView)
+RetrieveUpdateDestroyAPIView позволяет получить, изменять, удалять 1 запись
+
+в settings.py добавить настройки для фреймворка
+    REST_FRAMEWORK = {
+        'DEFAULT_RENDERER_CLASSES': [
+            'rest_framework.renderers.JSONRenderer',
+    #        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
