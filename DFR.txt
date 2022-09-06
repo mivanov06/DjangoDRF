@@ -72,3 +72,14 @@ python manage.py startapp women
 для проверки принятых данных в функцию post добавить
         serializer = WomenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
+#5
+добавить метод create в WomenSerializer
+        def create(self, validated_data):
+            return Women.objects.create(**validated_data)
+
+добавить метод update в WomenSerializer
+    и метод put в WomenAPIView
+        def put(self, request, *args, **kwargs):
+
+
