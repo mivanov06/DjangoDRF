@@ -24,7 +24,7 @@ class WomenAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = Women.objects.all()  # возвращает одно значение
     serializer_class = WomenSerializer
     permission_classes = (IsAuthenticated,)
-    authentication_classes = (TokenAuthentication,)
+    # authentication_classes = (TokenAuthentication,)
     # permission_classes = (IsOwnerOrReadOnly,)
 
 
