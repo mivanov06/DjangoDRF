@@ -242,4 +242,22 @@ class WomenViewSet(viewsets.ModelViewSet):
         'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
         'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
         'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
-}
+        }
+
+
+#15. Добавляем пагинацию (pagination)
+
+    Добавить
+        REST_FRAMEWORK = {
+        'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+        'PAGE_SIZE': 100
+        }
+
+    Для пагинации отдельного запроса создать свой класс пагинации
+    и добавить во views.py
+        class WomenAPIListPagination(PageNumberPagination):
+        page_size = 3
+        page_size_query_param = 'page_size'
+        max_page_size = 1000
+
+    и подключить к виду (view)
