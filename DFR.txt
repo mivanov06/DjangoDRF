@@ -164,3 +164,29 @@ class WomenViewSet(viewsets.ModelViewSet):
 #11. Авторизация и аутентификация. Session-based authentication
     Для авторизации на основе сессии добавить в маршруты
     path('api/v1/drf-auth/', include('rest_framework.urls')),
+
+#12. Аутентификация по токенам. Пакет Djoser
+
+    pip install djoser
+
+    Добавить приложение в APP
+
+        'rest_framework.authtoken', # стандартная таблица авторизации по токенам
+        'djoser',
+
+    Сделать миграцию
+        python manage.py migrate
+
+    Добавить маршруты
+        path(r'^auth/', include('djoser.urls')),
+        re_path(r'^auth/', include('djoser.urls.authtoken')),
+
+    В settings.py в секцию REST_FRAMEWORK добавить
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+
+    в классе WomenAPIUpdate добавить для авторизации по токену
+        authentication_classes = (TokenAuthentication,)
