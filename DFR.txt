@@ -160,3 +160,7 @@ class WomenViewSet(viewsets.ModelViewSet):
         'rest_framework.permissions.AllowAny',
     ]
 
+
+#11. Авторизация и аутентификация. Session-based authentication
+    Для авторизации на основе сессии добавить в маршруты
+    path('api/v1/drf-auth/', include('rest_framework.urls')),
